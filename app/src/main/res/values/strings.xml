@@ -12,5 +12,7 @@
     <string name="notification_listener_service_explanation">"For the the app. to work you need to enable the Notification Listener Service. Enable it now?"</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <!-- other Strings -->
+    <string name="main_web_url">https://rajaram.thoughtifies.com/</string>
 
 </resources>

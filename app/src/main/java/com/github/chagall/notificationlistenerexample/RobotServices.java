@@ -45,7 +45,6 @@ public class RobotServices {
                         // Display the first 500 characters of the response string.
                         Log.d("Voly","Response is: "+ response);
                         robotUrl = response;
-                        postNotification(null);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -61,9 +60,7 @@ public class RobotServices {
     public void postNotification(StatusBarNotification sbn){
         final String TAG = "postNotification";
         Map<String, String> params = new HashMap<String, String>();
-        params.put("userID", "userid");
-        params.put("email","email");
-        params.put("passwd", "password");
+        params.put("tickerText", sbn.getNotification().tickerText.toString());
         // Request a string response from the provided URL.
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, robotUrl + "/appNotification",new JSONObject(params),
                 new Response.Listener<JSONObject>() {
