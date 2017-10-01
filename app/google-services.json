@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "810415584445",
+    "firebase_url": "https://rajaram-firebase.firebaseio.com",
+    "project_id": "rajaram-firebase",
+    "storage_bucket": "rajaram-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:810415584445:android:2ab043049f995e02",
+        "android_client_info": {
+          "package_name": "com.thoughtifies.rajaram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "810415584445-peqjkqf6pagt7b1r7eiju4521n5q0a34.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thoughtifies.rajaram",
+            "certificate_hash": "332cf9b8b6f06c349ca5a024493bfcbd8c2a702d"
+          }
+        },
+        {
+          "client_id": "810415584445-b6q98pnnk4ghib92cke91ep09vc64qv3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkA2egfnHDcvMbHpUvKD4rlPVH0VPSmPU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "810415584445-b6q98pnnk4ghib92cke91ep09vc64qv3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
