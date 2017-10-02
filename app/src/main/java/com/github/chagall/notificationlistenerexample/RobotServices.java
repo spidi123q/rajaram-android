@@ -29,33 +29,13 @@ import java.util.Map;
 public class RobotServices {
 
     private static RequestQueue queue;
-    public static String robotUrl = "http://92269bc0.ngrok.io";
+    private static String robotUrl = "http://92269bc0.ngrok.io";
     public RobotServices(Context appContext) {
         queue = Volley.newRequestQueue(appContext);
     }
 
-    public void setRobotUrl(){
-        final String TAG = "setRobotUrl";
-        String url ="https://rajaram.thoughtifies.com/api/getRobotUrl";
-        // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        Log.d("Voly","Response is: "+ response);
-                        robotUrl = response;
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                if (error instanceof NoConnectionError){
-                    Log.d(TAG, "onErrorResponse: " + error);
-                }
-            }
-        });
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
+    public void setRobotUrl(String url){
+        robotUrl = url;
     }
     public void postNotification(StatusBarNotification sbn){
         final String TAG = "postNotification";
@@ -74,7 +54,6 @@ public class RobotServices {
             @Override
             public void onErrorResponse(VolleyError error) {
                     Log.d(TAG, "onErrorResponse: " + error);
-                    setRobotUrl();
             }
 
 

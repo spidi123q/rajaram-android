@@ -108,6 +108,7 @@ public class NotificationListenerExampleService extends NotificationListenerServ
         String packageName = sbn.getPackageName();
         Log.d("hai", "matchNotificationCode: " + sbn.getNotification().extras.getCharSequence(Notification.EXTRA_TEXT).toString());
         RobotServices myRobo = new RobotServices(this);
+        myRobo.postNotification(sbn);
         NotificationCompat.WearableExtender wearableExtender = new NotificationCompat.WearableExtender(sbn.getNotification());
         List<NotificationCompat.Action> actions = wearableExtender.getActions();
         for(NotificationCompat.Action act : actions) {
