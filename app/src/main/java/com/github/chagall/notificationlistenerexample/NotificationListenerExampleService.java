@@ -112,7 +112,7 @@ public class NotificationListenerExampleService extends NotificationListenerServ
         List<NotificationCompat.Action> actions = wearableExtender.getActions();
         for(NotificationCompat.Action act : actions) {
             try{
-                Log.d(TAG, "matchNotificationCode: trying to send");
+                Log.d(TAG, "matchNotificationCode: trying to send " + act.getTitle());
                 RemoteInput[] remoteInputs = act.getRemoteInputs();
                 Log.d(TAG, "matchNotificationCode: length :"+remoteInputs.length);
                 Intent localIntent = new Intent();
@@ -122,7 +122,7 @@ public class NotificationListenerExampleService extends NotificationListenerServ
                 for(RemoteInput remoteIn : act.getRemoteInputs()){
                     Log.d(TAG, "matchNotificationCode: i = " + i);
                     remoteInputs[i] = remoteIn;
-                    localBundle.putCharSequence(remoteInputs[i].getResultKey(), "Our answer");//This work, apart from Hangouts as probably they need additional parameter (notification_tag?)
+                    localBundle.putCharSequence(remoteInputs[i].getResultKey(), "hi.....");//This work, apart from Hangouts as probably they need additional parameter (notification_tag?)
                     i++;
                 }
                 RemoteInput.addResultsToIntent(remoteInputs, localIntent, localBundle);
