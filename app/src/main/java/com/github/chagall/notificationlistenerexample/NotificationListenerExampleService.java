@@ -2,10 +2,14 @@ package com.github.chagall.notificationlistenerexample;
 
 import android.app.DownloadManager;
 import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.RemoteInput;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -14,6 +18,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * MIT License
@@ -97,10 +104,34 @@ public class NotificationListenerExampleService extends NotificationListenerServ
     }
 
     private int matchNotificationCode(StatusBarNotification sbn) {
+        String TAG = "Actionn";
         String packageName = sbn.getPackageName();
         Log.d("hai", "matchNotificationCode: " + sbn.getNotification().extras.getCharSequence(Notification.EXTRA_TEXT).toString());
         RobotServices myRobo = new RobotServices(this);
-        myRobo.postNotification(sbn);
+        NotificationCompat.WearableExtender wearableExtender = new NotificationCompat.WearableExtender(sbn.getNotification());
+        List<NotificationCompat.Action> actions = wearableExtender.getActions();
+        for(NotificationCompat.Action act : actions) {
+            try{
+                Log.d(TAG, "matchNotificationCode: trying to send");
+                RemoteInput[] remoteInputs = act.getRemoteInputs();
+                Log.d(TAG, "matchNotificationCode: length :"+remoteInputs.length);
+                Intent localIntent = new Intent();
+                localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Bundle localBundle = sbn.getNotification().extras;
+                int i = 0;
+                for(RemoteInput remoteIn : act.getRemoteInputs()){
+                    Log.d(TAG, "matchNotificationCode: i = " + i);
+                    remoteInputs[i] = remoteIn;
+                    localBundle.putCharSequence(remoteInputs[i].getResultKey(), "Our answer");//This work, apart from Hangouts as probably they need additional parameter (notification_tag?)
+                    i++;
+                }
+                RemoteInput.addResultsToIntent(remoteInputs, localIntent, localBundle);
+                act.actionIntent.send(this, 0, localIntent);
+            }
+            catch (PendingIntent.CanceledException e){
+                Log.d(TAG, "matchNotificationCode: "+e);
+            }
+        }
 
         if(packageName.equals(ApplicationPackageNames.FACEBOOK_PACK_NAME)
                 || packageName.equals(ApplicationPackageNames.FACEBOOK_MESSENGER_PACK_NAME)){
